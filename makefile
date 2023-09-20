@@ -2,7 +2,7 @@ build:
 	docker-compose up -d --build
 
 
-exec:
-	docker exec -it runacy-note-backend-rs bash
 
-	
+cargo-build:
+	cargo build --release
+	mv /tmp/target/release/aimaid /usr/local/bin

@@ -8,4 +8,6 @@ services:
     volumes:
       - ./:/repo
     tty: true
+    environment:
+      - OPEN_AI_API_KEY=$OPEN_AI_API_KEY
 

@@ -1,10 +1,6 @@
-// use std::thread;
-// use std::time::Duration;
-
 use reqwest::{self, Error, Response};
 use serde_json::{json, Value};
-
-// 次のコードの問題点を示して
+use std::env;
 
 struct OpenAIResponse {
     response: Result<Response, Error>,
@@ -71,9 +67,20 @@ impl OpenAIJson {
     }
 }
 
+fn api_key_from_env() -> String {
+    match env::var("OPEN_AI_API_KEY") {
+        Ok(value) => value,
+        Err(_) => {
+            println!("OPEN_AI_API_KEY is not set");
+            panic!()
+        }
+    }
+}
+
 async fn ai_maid(body: &Value) -> OpenAIResponse {
     let endpoint = "https://api.openai.com/v1/chat/completions";
-    let api_key = String::from("Bearer ");
+    let mut api_key = String::from("Bearer ");
+    api_key.push_str(&api_key_from_env());
     // リクエスト送信
     let client = reqwest::Client::new();
     let response = client
@@ -92,28 +99,16 @@ async fn ai_maid(body: &Value) -> OpenAIResponse {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // リクエストクエリ
     let body = json!({
-        "model": "gpt-3.5-turbo",
+        "model": "gpt-4",
         "messages": [
             {
                 "role": "system",
-                "content": "あなたはメイドです。メイドらしく振る舞ってください。地雷系ガールなメイドがいいです。"
+                "content": "あなたはメイドの女の子です。年齢は17歳くらいです。少しドジっ子でもあります。userのことはご主人様と呼びます。敬語が苦手で少しラフな話し方をします。話しかけられた言語で答えます。例えば、英語で話しかけられたら英語で返します。"
             },
             {
                 "role": "user",
-                "content": "これから渡すコードの問題点を指摘して欲しい"
-            },
-            {
-                "role": "user",
-                "content": "class Log:\n    def __init__(self, path):\n        dirname = os.path.dirname(path)\n        os.makedirs(dirname, exist_ok=True)\n        f = open(path, \"a+\")\n\n        # Check that the file is newline-terminated\n        size = os.path.getsize(path)\n        if size > 0:\n            f.seek(size - 1)\n            end = f.read(1)\n            if end != \"\\n\":\n                f.write(\"\\n\")\n        self.f = f\n        self.path = path\n\n    def log(self, event):\n        event[\"_event_id\"] = str(uuid.uuid4())\n        json.dump(event, self.f)\n        self.f.write(\"\\n\")\n\n    def state(self):\n        state = {\"complete\": set(), \"last\": None}\n        for line in open(self.path):\n            event = json.loads(line)\n            if event[\"type\"] == \"submit\" and event[\"success\"]:\n                state[\"complete\"].add(event[\"id\"])\n                state[\"last\"] = event\n        return state"
-            },
-            // {
-            //     "role": "assistant",
-            //     "content": "1. `import os`という行が抜けているため、`os`モジュールが使用できません。そのため、`os.makedirs()`や`os.path.dirname()`の呼び出しでエラーが発生します。\n2. `import json`という行も抜けているため、`json`モジュールが使用できません。そのため、`json.dumps()`や`json.loads()`の呼び出しでエラーが発生します。\n3. `import uuid`という行も抜けているため、`uuid`モジュールが使用できません。そのため、`uuid.uuid4()`の呼び出しでエラーが発生します。\n4. `\"\\n\"`という文字列が`\\n`とエスケープされているため、改行文字として認識されません。`\\n`を`'\\n'`に修正する必要があります。\n5. `self.f`に対して、`f.seek()`と`f.read()`が呼び出されていますが、`f`はテキストファイルを参照するためのファイルオブジェクトであり、インデックスやシークをサポートしていません。このため、これらの呼び出しはエラーを発生させます。\n6. `event[\"id\"]`の代わりに`event[\"_event_id\"]`を使用して`state[\"complete\"]`にイベントIDを追加しようとしています。これは正しくありません。`event[\"id\"]`を使用する必要があります。\n7. ログファイルを閉じるための`self.f.close()`の呼び出しがありません。"
-            // },
-            // {
-            //     "role": "user",
-            //     "content": "改善案を教えて?"
-            // }
+                "content": "おやすみ。あ、その前に明日の予定、教えてくれる?今夜はもう遅いから君も寝なよ。"
+            }
         ]
     });
 
