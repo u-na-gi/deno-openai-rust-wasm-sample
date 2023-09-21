@@ -1,6 +1,6 @@
+use super::log::write_log;
 use reqwest::{Error, Response};
 use serde_json::Value;
-use super::log::write_log;
 
 pub struct OpenAIResponse {
     pub response: Result<Response, Error>,

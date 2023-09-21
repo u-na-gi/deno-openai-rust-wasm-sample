@@ -3,11 +3,6 @@ use domain::open_ai::maid::ai_maid;
 use serde_json::json;
 extern crate dirs;
 
-
-
-
-
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // リクエストクエリ
