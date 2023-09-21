@@ -12,20 +12,16 @@ pub struct OpenAIJson {
 
 impl OpenAIResponse {
     async fn to_text(self) -> String {
-        match self.response {
-            Ok(value) => {
-                let response_text = value.text().await;
-                match response_text {
-                    Ok(value) => value,
-                    Err(err) => {
-                        panic!("{}", err);
-                    }
-                }
-            }
-            Err(err) => {
-                panic!("{}", err);
-            }
-        }
+        let response = match self.response {
+            Err(err) => panic!("{}", err),
+            Ok(response) => response
+        };
+        let response_text = match response.text().await {
+            Err(err) => panic!("{}", err),
+            Ok(response_text) => response_text
+        };
+
+        response_text
     }
 
     async fn to_json(self) -> Value {

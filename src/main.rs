@@ -1,10 +1,26 @@
 mod domain;
+
 use domain::open_ai::maid::ai_maid;
 use serde_json::json;
 extern crate dirs;
+use clap::Parser;
+
+
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    /// ask for maid
+    #[arg(short, long)]
+    query: String
+}
+
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+
+    let args = Args::parse();
+
+
     // リクエストクエリ
     let body = json!({
         "model": "gpt-4",
@@ -15,7 +31,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             },
             {
                 "role": "user",
-                "content": "rustでメソッドチェーン。"
+                "content": args.query
             }
         ]
     });
