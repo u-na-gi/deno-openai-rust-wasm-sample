@@ -10,4 +10,7 @@ services:
     tty: true
     environment:
       - OPEN_AI_API_KEY=$OPEN_AI_API_KEY
+      - GITHUB_USER_NAME=$GITHUB_USER_NAME
+      - GITHUB_TOKEN=$GITHUB_TOKEN
+      - GITHUB_EMAIL=$GITHUB_EMAIL
 
