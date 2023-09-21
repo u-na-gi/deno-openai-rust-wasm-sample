@@ -107,7 +107,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             },
             {
                 "role": "user",
-                "content": "おやすみ。あ、その前に明日の予定、教えてくれる?今夜はもう遅いから君も寝なよ。"
+                "content": "今日のお昼ご飯は?"
             }
         ]
     });
