@@ -14,11 +14,11 @@ impl OpenAIResponse {
     async fn to_text(self) -> String {
         let response = match self.response {
             Err(err) => panic!("{}", err),
-            Ok(response) => response
+            Ok(response) => response,
         };
         let response_text = match response.text().await {
             Err(err) => panic!("{}", err),
-            Ok(response_text) => response_text
+            Ok(response_text) => response_text,
         };
 
         response_text

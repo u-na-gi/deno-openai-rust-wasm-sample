@@ -21,6 +21,5 @@ pub async fn ai_maid(body: &Value) -> OpenAIResponse {
     let result = OpenAIResponse { response: response };
     sp.stop_with_newline();
 
-
     result
 }

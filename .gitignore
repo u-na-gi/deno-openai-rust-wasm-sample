@@ -3,3 +3,4 @@ Cargo.lock
 audio.wav
 query.json
 text.txt
+.DS_Store
