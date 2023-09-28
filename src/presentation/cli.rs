@@ -22,7 +22,7 @@ pub fn cli() -> Command {
                 // .arg(arg!(-rva --remove-all "全ての記憶を削除します。"))
                 // .arg(arg!(-l --list "現在保持されている記憶名を表示します。"))
                 // .arg(arg!(-c --current "現在選択されている記憶名を表示します。"))
-                // .arg_required_else_help(true),
+                .arg_required_else_help(true),
         )
 }
 
