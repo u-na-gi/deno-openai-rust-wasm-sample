@@ -1,0 +1,13 @@
+FROM rust:1.80.1-slim-bullseye
+
+RUN apt update && apt install -y curl wget git 
+
+# WORKDIR /app-dev
+
+# COPY ./rust/Cargo.toml /app-dev/Cargo.toml
+# COPY ./rust/Cargo.lock /app-dev/Cargo.lock
+# COPY ./rust/src /app-dev/src
+
+# RUN cargo build
+
+WORKDIR /app

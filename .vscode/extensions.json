@@ -2,5 +2,6 @@
   "recommendations": [
     "rust-lang.rust-analyzer",
     "tejanium.copy-github-permalink",
+    "tamasfe.even-better-toml",
   ]
 }
