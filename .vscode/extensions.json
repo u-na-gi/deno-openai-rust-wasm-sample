@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "rust-lang.rust-analyzer",
-    "tejanium.copy-github-permalink",
+    "justjavac.vscode-deno-extensionpack"
   ]
 }

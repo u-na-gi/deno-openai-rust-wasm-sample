@@ -1,16 +1,16 @@
 version: '3.9'
 services:
-  rs:
-    container_name: aimaid
+  aimaid:
+    image: aimaid:latest
     build: 
       context: .
-      dockerfile: ./docker/dockerfile.dev
+      dockerfile: ./dockerfile.dev
     volumes:
-      - ./:/repo
+      - ./:/app
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.ssh:/root/.ssh
     tty: true
-    environment:
-      - OPEN_AI_API_KEY=$OPEN_AI_API_KEY
-      - GITHUB_USER_NAME=$GITHUB_USER_NAME
-      - GITHUB_TOKEN=$GITHUB_TOKEN
-      - GITHUB_EMAIL=$GITHUB_EMAIL
+    command: tail -f /dev/null
+    env_file:
+      - .env.local
 

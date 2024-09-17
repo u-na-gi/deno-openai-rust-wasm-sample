@@ -1,0 +1,5 @@
+FROM denoland/deno:debian-1.46.3
+
+RUN apt update && apt install -y curl wget git 
+
+WORKDIR /app

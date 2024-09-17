@@ -4,3 +4,10 @@ audio.wav
 query.json
 text.txt
 .DS_Store
+.env.local
+
+# Added by cargo
+
+/target
+
+*.db
