@@ -9,3 +9,5 @@ text.txt
 # Added by cargo
 
 /target
+
+*.db
