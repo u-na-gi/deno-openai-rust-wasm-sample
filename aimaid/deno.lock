@@ -2,6 +2,8 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "npm:@types/node": "npm:@types/node@18.16.19",
+      "npm:compute-cosine-similarity": "npm:compute-cosine-similarity@1.1.0",
       "npm:openai": "npm:openai@4.61.1"
     },
     "npm": {
@@ -56,6 +58,29 @@
         "integrity": "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==",
         "dependencies": {
           "delayed-stream": "delayed-stream@1.0.0"
+        }
+      },
+      "compute-cosine-similarity@1.1.0": {
+        "integrity": "sha512-FXhNx0ILLjGi9Z9+lglLzM12+0uoTnYkHm7GiadXDAr0HGVLm25OivUS1B/LPkbzzvlcXz/1EvWg9ZYyJSdhTw==",
+        "dependencies": {
+          "compute-dot": "compute-dot@1.1.0",
+          "compute-l2norm": "compute-l2norm@1.1.0",
+          "validate.io-array": "validate.io-array@1.0.6",
+          "validate.io-function": "validate.io-function@1.0.2"
+        }
+      },
+      "compute-dot@1.1.0": {
+        "integrity": "sha512-L5Ocet4DdMrXboss13K59OK23GXjiSia7+7Ukc7q4Bl+RVpIXK2W9IHMbWDZkh+JUEvJAwOKRaJDiFUa1LTnJg==",
+        "dependencies": {
+          "validate.io-array": "validate.io-array@1.0.6",
+          "validate.io-function": "validate.io-function@1.0.2"
+        }
+      },
+      "compute-l2norm@1.1.0": {
+        "integrity": "sha512-6EHh1Elj90eU28SXi+h2PLnTQvZmkkHWySpoFz+WOlVNLz3DQoC4ISUHSV9n5jMxPHtKGJ01F4uu2PsXBB8sSg==",
+        "dependencies": {
+          "validate.io-array": "validate.io-array@1.0.6",
+          "validate.io-function": "validate.io-function@1.0.2"
         }
       },
       "define-data-property@1.1.4": {
@@ -223,6 +248,14 @@
       },
       "undici-types@5.26.5": {
         "integrity": "sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==",
+        "dependencies": {}
+      },
+      "validate.io-array@1.0.6": {
+        "integrity": "sha512-DeOy7CnPEziggrOO5CZhVKJw6S3Yi7e9e65R1Nl/RTN1vTQKnzjfvks0/8kQ40FP/dsjRAOd4hxmJ7uLa6vxkg==",
+        "dependencies": {}
+      },
+      "validate.io-function@1.0.2": {
+        "integrity": "sha512-LlFybRJEriSuBnUhQyG5bwglhh50EpTL2ul23MPIuR1odjO7XaMLFV8vHGwp7AZciFxtYOeiSCT5st+XSPONiQ==",
         "dependencies": {}
       },
       "web-streams-polyfill@4.0.0-beta.3": {
