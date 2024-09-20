@@ -1,6 +1,6 @@
 services:
-  aimaid:
-    image: aimaid:latest
+  deno-openai-rust-wasm-sample:
+    image: deno-openai-rust-wasm-sample:latest
     build: 
       context: .
       dockerfile: ./dockerfile.dev
