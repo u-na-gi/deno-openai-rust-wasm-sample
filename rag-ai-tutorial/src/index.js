@@ -92,8 +92,6 @@ app.delete('/notes/:id', async (c) => {
   const query = `DELETE FROM notes WHERE id = ?`
   await c.env.DB.prepare(query).bind(id).run()
 
-  await c.env.VECTOR_INDEX.deleteByIds([id])
-
   return c.status(204)
 })
 

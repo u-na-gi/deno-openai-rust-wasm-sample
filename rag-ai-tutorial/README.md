@@ -32,6 +32,11 @@ curl -X GET https://rag-ai-tutorial.orcinusorca1758dv6932.workers.dev
 ```
 
 削除
+https://developers.cloudflare.com/api/operations/vectorize-delete-vectorize-index
 ```shell
-curl -X DELETE https://rag-ai-tutorial.orcinusorca1758dv6932.workers.dev/notes/2
+export INDEX_NAME=vector-index
+curl -vv --request DELETE \
+  --url https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/vectorize/v2/indexes/${INDEX_NAME} \
+  --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+  --header 'Content-Type: application/json'
 ```
