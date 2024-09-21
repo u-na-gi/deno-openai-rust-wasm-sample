@@ -21,14 +21,14 @@ vector-indexに保存される
 
 d1にメッセージを保存する + vectorizeに保存する
 ```shell
-curl -X POST https://rag-ai-tutorial.orcinusorca1758dv6932.workers.dev/notes \
+curl -X POST https://<domain>/notes \
   -H "Content-Type: application/json" \
   -d '{"text": "the orca (killer whale) is seen as a protector of the seas. Legend says they guard fishermen, guiding them to bountiful waters, and are considered sacred creatures representing strength, intelligence, and the balance of nature."}'
 ```
 
 RAGを試す
 ```shell
-curl -X GET https://rag-ai-tutorial.orcinusorca1758dv6932.workers.dev
+curl -X GET https://<domain>
 ```
 
 削除
