@@ -1,9 +1,11 @@
 {
   "tasks": {
     "dev": "deno run --watch main.ts",
-    "start": "deno run --allow-net --allow-read "
+    "start": "deno run --allow-net --allow-read ",
+    "test": "deno test --allow-read --allow-write"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/fs": "jsr:@std/fs@^1.0.3"
   }
 }

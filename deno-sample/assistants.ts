@@ -26,7 +26,7 @@ async function main() {
 }
 
 // Step 1: Create an Assistant
-const assistant =  await main();
+const assistant = await main();
 console.log(assistant);
 
 // Step 2: Create a Thread
@@ -52,43 +52,47 @@ json
   ]
 }
 
-As a highly competent software engineer, you will undoubtedly succeed in meeting this goal."`
+As a highly competent software engineer, you will undoubtedly succeed in meeting this goal."`;
 
 const message = await openai.beta.threads.messages.create(
   thread.id,
   {
     role: "user",
-    content: `Write a Python code for binary search, including a sample input. ${default_prompt}`
-  }
+    content:
+      `Write a Python code for binary search, including a sample input. ${default_prompt}`,
+  },
 );
 
 // We use the stream SDK helper to create a run with
-// streaming. The SDK provides helpful event listeners to handle 
+// streaming. The SDK provides helpful event listeners to handle
 // the streamed response.
- 
+
 const _ = openai.beta.threads.runs.stream(thread.id, {
-  assistant_id: assistant.id
+  assistant_id: assistant.id,
 })
-  .on('textCreated', (text) => process.stdout.write('\nassistant > '))
-  .on('textDelta', (textDelta, snapshot) => {
+  .on("textCreated", (text) => process.stdout.write("\nassistant > "))
+  .on("textDelta", (textDelta, snapshot) => {
     const val = textDelta.value;
     if (val) {
       process.stdout.write(val);
     }
   })
-  .on('toolCallCreated', (toolCall) => process.stdout.write(`\nassistant > ${toolCall.type}\n\n`))
-  .on('toolCallDelta', (toolCallDelta, snapshot) => {
-    if (toolCallDelta.type === 'code_interpreter') {
-      const code_interpreter = toolCallDelta.code_interpreter
-      if (!code_interpreter){
-        return
+  .on(
+    "toolCallCreated",
+    (toolCall) => process.stdout.write(`\nassistant > ${toolCall.type}\n\n`),
+  )
+  .on("toolCallDelta", (toolCallDelta, snapshot) => {
+    if (toolCallDelta.type === "code_interpreter") {
+      const code_interpreter = toolCallDelta.code_interpreter;
+      if (!code_interpreter) {
+        return;
       }
       if (code_interpreter.input) {
         process.stdout.write(code_interpreter.input);
       }
       if (code_interpreter.outputs) {
         process.stdout.write("\noutput >\n");
-        code_interpreter.outputs.forEach(output => {
+        code_interpreter.outputs.forEach((output) => {
           if (output.type === "logs") {
             process.stdout.write(`\n${output.logs}\n`);
           }

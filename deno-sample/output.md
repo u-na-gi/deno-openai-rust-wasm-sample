@@ -13,39 +13,40 @@
 ### コードの流れ
 
 1. **ポインタからスライスを生成**:
-    ```rust
-    let a = unsafe { std::slice::from_raw_parts(a_ptr, len) };
-    let b = unsafe { std::slice::from_raw_parts(b_ptr, len) };
-    ```
+   ```rust
+   let a = unsafe { std::slice::from_raw_parts(a_ptr, len) };
+   let b = unsafe { std::slice::from_raw_parts(b_ptr, len) };
+   ```
    `std::slice::from_raw_parts`を使用して、ポインタから安全でない方法（unsafe）でスライスを作成しています。このスライスは、指定された長さ（`len`）の要素を持つ配列を参照します。
 
 2. **ドット積の計算**:
-    ```rust
-    let dot_product: f64 = a.iter().zip(b.iter()).map(|(x, y)| x * y).sum();
-    ```
+   ```rust
+   let dot_product: f64 = a.iter().zip(b.iter()).map(|(x, y)| x * y).sum();
+   ```
    `a`と`b`の要素をペアにして、対応する要素同士を乗算し、その和を取ることでドット積を計算しています。
 
 3. **ベクトルの大きさ（ノルム）の計算**:
-    ```rust
-    let a_magnitude: f64 = a.iter().map(|x| x * x).sum::<f64>().sqrt();
-    let b_magnitude: f64 = b.iter().map(|x| x * x).sum::<f64>().sqrt();
-    ```
+   ```rust
+   let a_magnitude: f64 = a.iter().map(|x| x * x).sum::<f64>().sqrt();
+   let b_magnitude: f64 = b.iter().map(|x| x * x).sum::<f64>().sqrt();
+   ```
    それぞれのベクトルの成分の平方和を計算し、その平方根を取ることでベクトルの大きさを求めています。
 
 4. **大きさがゼロかチェック**:
-    ```rust
-    if a_magnitude == 0.0 || b_magnitude == 0.0 {
-        return 0.0; // 大きさが0のベクトルの場合はコサイン類似度が定義されない
-    }
-    ```
+   ```rust
+   if a_magnitude == 0.0 || b_magnitude == 0.0 {
+       return 0.0; // 大きさが0のベクトルの場合はコサイン類似度が定義されない
+   }
+   ```
    どちらかのベクトルの大きさが0の場合、コサイン類似度は定義できないため、0.0を返します。
 
 5. **コサイン類似度の計算**:
-    ```rust
-    dot_product / (a_magnitude * b_magnitude)
-    ```
+   ```rust
+   dot_product / (a_magnitude * b_magnitude)
+   ```
    最後に、ドット積を2つのベクトルの大きさの積で割ることによって、コサイン類似度を計算し、その値を返します。
 
 ### 注意点
+
 - `unsafe`コードは、ポインタ操作を扱っているため、データが適切であることが保証されなければなりません。ポインタが有効で、ベクトルのサイズが正しいことを確認する必要があります。
 - コサイン類似度は、ベクトルの方向の類似性を測定する指標であり、大きさには影響を受けません。
