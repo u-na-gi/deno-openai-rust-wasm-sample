@@ -102,23 +102,24 @@ export async function processPythonFiles(dir: string, outputPath: string) {
   const ignorePatterns = new Set<string>();
 
   // 再起的にすべての階層で.gitignoreのパターンを収集
-  for await (const entry of  walk(dir, {includeDirs: true})) {
+  for await (const entry of walk(dir, { includeDirs: true })) {
     if (entry.isDirectory) {
-      const patterns = await getGitignorePatterns(entry.path)
-      patterns.forEach((pattern) => ignorePatterns.add(pattern))
+      const patterns = await getGitignorePatterns(entry.path);
+      patterns.forEach((pattern) => ignorePatterns.add(pattern));
     }
   }
 
   // 再起的にすべてのファイルをチェック
   for await (const entry of walk(dir, { exts: [".py"] })) {
-    if (entry.isFile && !isIgnored(entry.path, ignorePatterns)) {
+    if (entry.isFile && isIgnored(entry.path, ignorePatterns)) {
       const fileContent = await Deno.readTextFile(entry.path);
-      markdownContent += `\n- ${entry.path}\n\`\`\`python\n${fileContent}\n\`\`\`\n`;
+      markdownContent +=
+        `\n- ${entry.path}\n\`\`\`python\n${fileContent}\n\`\`\`\n`;
+    } else {
+      console.log("Is ignored. -> ", entry.path);
     }
   }
 
   // Markdownファイルに書き出し
   await writeMarkdownOutput(outputPath, markdownContent);
 }
-
-
