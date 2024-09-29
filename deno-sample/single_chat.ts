@@ -1,7 +1,7 @@
 import OpenAI from "npm:openai";
 const openai = new OpenAI();
 
-const text = await Deno.readTextFile("/app/aimaid/input.txt");
+const text = await Deno.readTextFile("/app/deno-sample/input.txt");
 
 const completion = await openai.chat.completions.create({
   model: "gpt-4o-mini",
@@ -20,4 +20,4 @@ const content = message.content;
 if (content === null) {
   throw new Error("No content in message");
 }
-await Deno.writeTextFile("/app/aimaid/output.md", content);
+await Deno.writeTextFile("/app/deno-sample/output.md", content);
